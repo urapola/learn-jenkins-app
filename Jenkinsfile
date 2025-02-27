@@ -39,6 +39,11 @@ pipeline {
                 '''
             }
         }
+       post{
+        always {
+            junit 'test-results/junit.xml'
+        }
+      }
 
         stage('Deploy') {
             agent{
@@ -54,12 +59,6 @@ pipeline {
                 echo "Deploying to production. site ID: $NETLIFY_SITE_ID"
                 '''
             }
-        }
-    }
-
-    post{
-        always {
-            junit 'test-results/junit.xml'
         }
     }
 }
